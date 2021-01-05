@@ -6,28 +6,31 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
     <script type="application/javascript">
+        let data = {};
+
         window.addEventListener('load', function () {
-            let nodes = document.querySelectorAll('.lesson');
-            let menuItems = document.querySelectorAll('.nav-list a');
+            data.nodes = document.querySelectorAll('.lesson');
+            data.menuItems = document.querySelectorAll('.nav-list a');
 
             window.addEventListener('scroll', setActive, false);
 
             setActive();
 
             function setActive() {
-                nodes.forEach((el, index) => {
+                data.nodes.forEach((el, index) => {
                     let
                         box = el.getBoundingClientRect(),
                         offsetTop = box.top + pageYOffset,
                         offsetBottom = box.bottom + pageYOffset,
                         paddingOffset = +(window.innerHeight / 5).toFixed(2);
 
-                    if (offsetTop <= (pageYOffset + paddingOffset) && (pageYOffset + paddingOffset) < offsetBottom) {
-                        console.log(true);
-                        menuItems[index].classList.add("active");
-                    } else {
-                        menuItems[index].classList.remove("active");
-                    }
+                    setTimeout(() => {
+                        if (offsetTop <= (pageYOffset + paddingOffset) && (pageYOffset + paddingOffset) < offsetBottom) {
+                            data.menuItems[index].classList.add("active");
+                        } else {
+                            data.menuItems[index].classList.remove("active");
+                        }
+                    }, 0);
                 });
             }
 
@@ -107,13 +110,14 @@
             color: white;
             padding: 8px 32px;
             text-decoration: none;
-            animation: .3s ease-in-out;
+            animation: 1s ease-in-out;
             cursor: pointer;
             vertical-align: middle;
             opacity: .6;
             height: 44px;
             display: flex;
             align-items: center;
+            outline: none;
         }
 
         .nav-list a.active::after {
@@ -168,6 +172,10 @@
             color: #0081a7;
         }
 
+
+        .author {
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -176,7 +184,7 @@
 
     <div class="side-bar">
 
-        <h1>Домашнее задание</h1>
+        <h1><span>Домашнее задание</span><br><span class="author">vladsdamnmemory</span></h1>
 
         <ul class="nav-list">
             <li><a href="#l-1">Урок 1</a></li>
@@ -260,7 +268,7 @@
         <div class="lesson" id="l-2">
 
             <h2>Урок №2</h2>
-            <h3 title="Понятие алгоритма, переменные, типы данных.">Понятие алгоритма, переменные, типы данных.</h3>
+            <h3 title="Ветвления. Циклы.">Ветвления. Циклы.</h3>
 
             <div class="task">
                 <header class="task-header">
