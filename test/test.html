@@ -8,7 +8,31 @@
 
 
 <script>
+    calcDeposit();
 
+    function calcDeposit() {
+        // Пользователь вводит сумму вклада и процент, который будет начисляться ежегодно.
+        // Отобразить размер вклада поочередно на ближайшие 5 лет.
+
+        let money, percent, incorrect, years = 5;
+
+        do {
+            money = parseFloat(prompt("Введите сумму вклада"));
+            percent = parseFloat(prompt("Введите кол-во процентов по вкладу"));
+            incorrect = isNaN(money) || isNaN(percent);
+
+            if (incorrect) {
+                alert("Данные введены не верно. Попробуйте еще раз, пожалуйста");
+            }
+        }
+        while (incorrect);
+
+        for (let i = 0; i < years; i++) {
+            // Будем считать, что речь идет о сложном проценте
+            alert(`Спустя ${i + 1} год(-а)/лет сумма вклада достигнет ${money = +(money / 100 * percent + money).toFixed(2)}`);
+        }
+
+    }
 </script>
 </body>
 </html>
