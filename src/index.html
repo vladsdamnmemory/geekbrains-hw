@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+    <script type="application/javascript">
+        window.addEventListener('load', function () {
+            let nodes = document.querySelectorAll('.lesson');
+            let menuItems = document.querySelectorAll('.nav-list a');
+
+            window.addEventListener('scroll', setActive, false);
+
+            setActive();
+
+            function setActive() {
+                nodes.forEach((el, index) => {
+                    let
+                        box = el.getBoundingClientRect(),
+                        offsetTop = box.top + pageYOffset,
+                        offsetBottom = box.bottom + pageYOffset,
+                        paddingOffset = +(window.innerHeight / 5).toFixed(2);
+
+                    if (offsetTop <= (pageYOffset + paddingOffset) && (pageYOffset + paddingOffset) < offsetBottom) {
+                        console.log(true);
+                        menuItems[index].classList.add("active");
+                    } else {
+                        menuItems[index].classList.remove("active");
+                    }
+                });
+            }
+
+        });
+    </script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Garamon", "Tahoma", "Arial", "sans-serif";
+            font-size: 16px;
+        }
+
+        .main-content {
+
+        }
+
+        .side-bar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 320px;
+            background: #fe5f55;
+
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: flex-start;
+        }
+
+        .page-content {
+            margin-left: 320px;
+            padding: 24px;
+        }
+
+        .lesson {
+            padding: 24px;
+            border-radius: 4px;
+        }
+
+        .lesson:hover {
+            background: #fafafa;
+        }
+
+
+        .task {
+            margin-bottom: 12px;
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .nav-list {
+            color: white;
+            font-size: 18px;
+
+            margin: auto 0;
+        }
+
+        .nav-list li {
+            list-style: none;
+        }
+
+        .nav-list a {
+            color: white;
+            padding: 8px 32px;
+            text-decoration: none;
+            animation: .3s ease-in-out;
+            cursor: pointer;
+            vertical-align: middle;
+            opacity: .6;
+            height: 44px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-list a.active::after {
+            content: "\1F34C";
+            margin-left: 5px;
+        }
+
+        .nav-list a:hover {
+            opacity: 1;
+        }
+
+        button {
+            appearance: none;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 24px;
+            cursor: pointer;
+            user-select: none;
+            display: inline-block;
+            background: #fee1c7;
+            color: #0081a7;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 0 8px 12px;
+            color: #ffefef;
+            font-size: 28px;
+            opacity: .5;
+        }
+
+        h2 {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        h2::before {
+            content: "\1F4D2";
+            margin-right: 5px;
+        }
+
+        h1, h3 {
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        h2, h3, div, p {
+            color: #6a605c;
+        }
+
+        h4 {
+            color: #0081a7;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="main-content">
+
+    <div class="side-bar">
+
+        <h1>Домашнее задание</h1>
+
+        <ul class="nav-list">
+            <li><a href="#l-1">Урок 1</a></li>
+            <li><a href="#l-2">Урок 2</a></li>
+        </ul>
+    </div>
+
+    <div class="page-content">
+
+        <!-- Lesson 1 -->
+        <div class="lesson" id="l-1">
+
+            <h2>Урок №1</h2>
+            <h3 title="Понятие алгоритма, переменные, типы данных.">Понятие алгоритма, переменные, типы данных.</h3>
+
+            <div class="task">
+                <header class="task-header">
+                    <h4>Задача №1</h4>
+                    <div class="btn-wrapper">
+                        <button onclick="convert()">Запустить</button>
+                    </div>
+                </header>
+                <div class="lesson-code">
+                  <pre><code class="language-javascript">
+    function convert() {
+        // Программа хранит в двух переменных курс доллара и евро.
+        // В первой переменной у вас хранится стоимость одного евро в рублях, во второй - стоимость одного доллара в рублях.
+        // Вы спрашиваете у пользователя, сколько рублей он хочет сконвертировать, получаете это число и считаете.
+        // Результат надо вывести на страницу с помощью alert.
+        const
+            EUR_TO_RUB = 89.72,
+            USD_TO_RUB = 73.95;
+
+        let amount = +prompt("How much shall we convert?", "10");
+
+        if (!isNaN(amount)) {
+            alert(`EUR ${(amount / EUR_TO_RUB).toFixed(2)}, USD ${(amount / USD_TO_RUB).toFixed(2)}`)
+        }
+    }
+            </code></pre>
+                </div>
+
+            </div>
+
+
+            <div class="task">
+
+                <header class="task-header">
+                    <h4>Задача №2</h4>
+                    <div class="btn-wrapper">
+                        <button onclick="calculateArea()">Запустить</button>
+                    </div>
+                </header>
+
+                <div class="lesson-code">
+                  <pre><code class="language-javascript">
+    function calculateArea() {
+        // Пользователь вводит длину оснований трапеции (a и b), а также высоту трапеции h.
+        // Программа выводит сообщение: «Площадь трапеции будет равна значение».
+        // Площадь вычисляется по формуле ((a + b) / 2) * h, где a, b - основания, h - высота.
+        let h = parseInt(prompt("Pass the height", "10"));
+        let a = parseInt(prompt("Pass the 'a' length", "3"));
+        let b = parseInt(prompt("Pass the 'b' length", "5"));
+
+        let result = ((a + b) / 2) * h;
+
+        if (!isNaN(result)) {
+            alert(`Trapeze area equals: ${result}`)
+        }
+    }
+            </code></pre>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        <!-- Lesson 2-->
+        <div class="lesson" id="l-2">
+
+            <h2>Урок №2</h2>
+            <h3 title="Понятие алгоритма, переменные, типы данных.">Понятие алгоритма, переменные, типы данных.</h3>
+
+            <div class="task">
+                <header class="task-header">
+                    <h4>Задача №1</h4>
+                    <div class="btn-wrapper">
+                        <button onclick="convert()">Запустить</button>
+                    </div>
+                </header>
+                <div class="lesson-code">
+                  <pre><code class="language-javascript">
+    function convert() {
+        // Программа хранит в двух переменных курс доллара и евро.
+        // В первой переменной у вас хранится стоимость одного евро в рублях, во второй - стоимость одного доллара в рублях.
+        // Вы спрашиваете у пользователя, сколько рублей он хочет сконвертировать, получаете это число и считаете.
+        // Результат надо вывести на страницу с помощью alert.
+        const
+            EUR_TO_RUB = 89.72,
+            USD_TO_RUB = 73.95;
+
+        let amount = +prompt("How much shall we convert?", "10");
+
+        if (!isNaN(amount)) {
+            alert(`EUR ${(amount / EUR_TO_RUB).toFixed(2)}, USD ${(amount / USD_TO_RUB).toFixed(2)}`)
+        }
+    }
+            </code></pre>
+                </div>
+
+            </div>
+
+
+            <div class="task">
+
+                <header class="task-header">
+                    <h4>Задача №2</h4>
+                    <div class="btn-wrapper">
+                        <button onclick="calculateArea()">Запустить</button>
+                    </div>
+                </header>
+
+                <div class="lesson-code">
+                  <pre><code class="language-javascript">
+    function calculateArea() {
+        // Пользователь вводит длину оснований трапеции (a и b), а также высоту трапеции h.
+        // Программа выводит сообщение: «Площадь трапеции будет равна значение».
+        // Площадь вычисляется по формуле ((a + b) / 2) * h, где a, b - основания, h - высота.
+        let h = parseInt(prompt("Pass the height", "10"));
+        let a = parseInt(prompt("Pass the 'a' length", "3"));
+        let b = parseInt(prompt("Pass the 'b' length", "5"));
+
+        let result = ((a + b) / 2) * h;
+
+        if (!isNaN(result)) {
+            alert(`Trapeze area equals: ${result}`)
+        }
+    }
+            </code></pre>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- Highlighter -->
+<script type="application/javascript">hljs.initHighlightingOnLoad();</script>
+
+<!-- Lesson 1 -->
+<script type="application/javascript">
+    function convert() {
+        // Программа хранит в двух переменных курс доллара и евро.
+        // В первой переменной у вас хранится стоимость одного евро в рублях, во второй - стоимость одного доллара в рублях.
+        // Вы спрашиваете у пользователя, сколько рублей он хочет сконвертировать, получаете это число и считаете.
+        // Результат надо вывести на страницу с помощью alert.
+        const
+            EUR_TO_RUB = 89.72,
+            USD_TO_RUB = 73.95;
+
+        let amount = +prompt("How much shall we convert?", "10");
+
+        if (!isNaN(amount)) {
+            alert(`EUR ${(amount / EUR_TO_RUB).toFixed(2)}, USD ${(amount / USD_TO_RUB).toFixed(2)}`)
+        }
+    }
+
+
+    function calculateArea() {
+        // Пользователь вводит длину оснований трапеции (a и b), а также высоту трапеции h.
+        // Программа выводит сообщение: «Площадь трапеции будет равна <значение>».
+        // Площадь вычисляется по формуле ((a + b) / 2) * h, где a, b - основания, h - высота.
+        let h = parseInt(prompt("Pass the height", "10"));
+        let a = parseInt(prompt("Pass the 'a' length", "3"));
+        let b = parseInt(prompt("Pass the 'b' length", "5"));
+
+        let result = ((a + b) / 2) * h;
+
+        if (!isNaN(result)) {
+            alert(`Trapeze area equals: ${result}`)
+        }
+    }
+</script>
+<!-- Lesson 2 -->
+<script type="application/javascript"></script>
+</body>
+</html>
