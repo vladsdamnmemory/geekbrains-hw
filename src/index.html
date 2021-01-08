@@ -187,6 +187,31 @@
         .author {
             font-size: 12px;
         }
+
+        .disclaimer-overlay {
+            z-index: 9999;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(45, 45, 45, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .disclaimer-window {
+            max-width: 600px;
+            padding: 24px;
+            background: #ffffff;
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: #888;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
@@ -400,8 +425,7 @@
                 </header>
 
                 <div class="lesson-code">
-                  <pre>
-                      <code class="language-javascript">
+                  <pre><code class="language-javascript">
     function calcDeposit() {
         // Пользователь вводит сумму вклада и процент, который будет начисляться ежегодно.
         // Отобразить размер вклада поочередно на ближайшие 5 лет.
@@ -436,6 +460,44 @@
         </div>
 
 
+    </div>
+
+
+    <div class="disclaimer-overlay">
+        <div class="disclaimer-window">
+            <h3 style="margin-bottom: 12px; text-align: center;">ДИСКЛЕЙМЕР</h3>
+            <p id="hey"></p>
+            <p>Пожалуйста, прочтите перед проверкой домашнего задания.</p>
+            <script type="application/javascript">
+                (function () {
+                    let
+                        h = new Date().getHours(),
+                        el = document.getElementById("hey"),
+                        night = [21, 22, 23, 24, 0, 1, 2, 3, 4],
+                        morning = [5, 6, 7, 8, 9, 10, 11],
+                        afternoon = [12, 13, 14, 15, 16, 17, 18, 19, 20];
+
+                    if (night.includes(h)) el.innerHTML = "Доброй ночи!";
+                    if (morning.includes(h)) el.innerHTML = "Доброе утро!";
+                    if (afternoon.includes(h)) el.innerHTML = "Добрый день!";
+
+                })();
+            </script>
+            <p>Если какое-то задание выполено так, как выполнено, это потому, что я так задумал. Значит в описании
+                задания, на мой взгляд, была неточная формулировка, и я сделал по-своему.</p>
+            <p>Пожалуйста, не занижайте оценку Д/З, если не понимаете, что написано, или сомневаетесь в правильности
+                написанного, не предоставив четких весомых аргументов.</p>
+            <p style="text-align: center;">P.S. Да, я хочу печеньки 😄</p>
+            <div style="display: flex;justify-content: center">
+                <button onclick="closeDisclaimer()">OK</button>
+            </div>
+            <script type="application/javascript">
+                function closeDisclaimer() {
+                    let node = document.getElementsByClassName("disclaimer-overlay")[0];
+                    node.parentNode.removeChild(node);
+                }
+            </script>
+        </div>
     </div>
 
 </div>
