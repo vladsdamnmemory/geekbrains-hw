@@ -558,7 +558,6 @@
                     <h4>Задача №2</h4>
                     <div class="btn-wrapper">
                         <button onclick="blindPrint()">Запустить</button>
-                        </button>
                     </div>
                 </header>
                 <p>Реализация задачи включает в себя манипуляции с DOM, event listeners, замыкания.</p>
@@ -621,7 +620,6 @@
                     <h4>Задача №3</h4>
                     <div class="btn-wrapper">
                         <button onclick="initPuzzleModified()">Запустить</button>
-                        </button>
                     </div>
                 </header>
                 <div class="lesson-code">
@@ -670,7 +668,9 @@
 
         for (let i = 0; i < questions.length; ++i) {
 
-            response = prompt(questions[i].text).split(",").map(value => value.trim());
+            response = prompt(questions[i].text);
+
+            response = response ? response.split(",").map(value => value.trim()) : [];
 
             if (response.length !== questions[i].answer.length || !response.every(value => questions[i].answer.includes(value))) {
                 // Incorrect guess
@@ -1053,7 +1053,9 @@
 
         for (let i = 0; i < questions.length; ++i) {
 
-            response = prompt(questions[i].text).split(",").map(value => value.trim());
+            response = prompt(questions[i].text);
+
+            response = response ? response.split(",").map(value => value.trim()) : [];
 
             if (response.length !== questions[i].answer.length || !response.every(value => questions[i].answer.includes(value))) {
                 // Incorrect guess
