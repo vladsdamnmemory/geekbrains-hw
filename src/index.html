@@ -188,7 +188,7 @@
             font-size: 12px;
         }
 
-        .disclaimer-overlay {
+        .disclaimer-overlay, .overlay {
             z-index: 9999;
             position: fixed;
             top: 0;
@@ -199,6 +199,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+        }
+
+        .overlay h3 {
+            color: #fafafa;
+            font-size: 32px;
+        }
+
+        .overlay p {
+            color: #fafafa;
+            font-size: 24px;
         }
 
         .disclaimer-window {
@@ -211,6 +222,27 @@
             margin-bottom: 12px;
             color: #888;
             line-height: 1.5;
+        }
+
+        #val {
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 48px;
+        }
+
+        footer.end {
+            padding-top: 12px;
+        }
+
+        footer.end a {
+            margin-top: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #fe5f55;
+        }
+
+        footer.end a:hover {
+            color: #f5a7a3;
         }
     </style>
 </head>
@@ -226,6 +258,7 @@
             <li><a href="#l-1">Урок 1 <br> <span class="subject">Понятие алгоритма, переменные, типы данных.</span></a>
             </li>
             <li><a href="#l-2">Урок 2 <br> <span class="subject">Ветвления. Циклы.</span></a></li>
+            <li><a href="#l-3">Урок 3 <br> <span class="subject">Массивы и функции</span></a></li>
         </ul>
     </div>
 
@@ -301,7 +334,7 @@
 
         </div>
 
-        <!-- Lesson 2-->
+        <!-- Lesson 2 -->
         <div class="lesson" id="l-2">
 
             <h2>Урок №2</h2>
@@ -460,6 +493,235 @@
         </div>
 
 
+        <!-- Lesson 3 -->
+        <div class="lesson" id="l-3">
+
+            <h2>Урок №3</h2>
+            <h3 title="Массивы и функции">Массивы и функции</h3>
+
+            <div class="task">
+                <header class="task-header">
+                    <h4>Задача №1</h4>
+                    <div class="btn-wrapper">
+                        <button onclick="alert(createArrByLength(10))">createArrByLength(10)</button>
+                        <button onclick="alert(reduce([1, 2, 3, 4]))">reduce([1, 2, 3, 4])</button>
+                        <button onclick="alert(getMax([5, 4, 74, 8]))">getMax([5, 4, 74, 8])</button>
+                        <button onclick="alert(getMin([5, 4, 74, 8]))">getMin([5, 4, 74, 8])</button>
+                        <button onclick="alert(getEvenArr([5, 4, 74, 8, 3, 1, 9]))">getEvenArr([5, 4, 74, 8, 3, 1, 9])
+                        </button>
+                    </div>
+                </header>
+                <div class="lesson-code">
+                  <pre><code class="language-javascript">
+    function createArrByLength(n) {
+        // a. Написать функцию, которая принимает в качестве параметра число n.
+        // Результатом работы функции является массив из N элементов со значениями 1, 2, 3… n.
+        if (typeof n !== "number") throw new TypeError("Argument is not a number");
+        let i = 0, arr = [];
+        while (i < n) {
+            arr.push(++i)
+        }
+        return arr;
+    }
+
+    function reduce(arr) {
+        // b. Написать функцию, которая принимает массив чисел. Результатом работы функции является сумма чисел этого массива.
+        if (!arr.every(value => typeof value === "number")) throw new TypeError("Array must contain numbers only");
+        return arr.reduce((acc, val) => acc += val);
+    }
+
+    function getMax(arr) {
+        //  c. Написать функцию, которая на вход получает массив целых чисел, и в качестве результата возвращает максимальное число.
+        if (!arr.every(value => typeof value === "number" && value % 1 === 0)) throw new TypeError("Array must contain digits");
+        return Math.max(...arr);
+    }
+
+    function getMin(arr) {
+        //     d. Написать функцию, которая на вход получает массив целых чисел, и в качестве результата возвращает минимальное число.
+        if (!arr.every(value => typeof value === "number" && value % 1 === 0)) throw new TypeError("Array must contain digits");
+        return Math.min(...arr);
+    }
+
+    function getEvenArr(arr) {
+        if (!arr.every(value => typeof value === "number" && value % 1 === 0)) throw new TypeError("Array must contain digits");
+        //     f. Написать функцию, которая на вход получает массив целых чисел, и в качестве результата возвращает только четные числа из этого массива.
+        //     Чтобы определить четность числа, воспользуйтесь оператором для подсчета остатка от деления: x % 2. Если остаток от деления числа на 2 равен 0,
+        //     число будет четное.
+        return arr.filter(v => v % 2 === 0);
+    }
+            </code></pre>
+                </div>
+            </div>
+
+            <div class="task">
+                <header class="task-header">
+                    <h4>Задача №2</h4>
+                    <div class="btn-wrapper">
+                        <button onclick="blindPrint()">Запустить</button>
+                        </button>
+                    </div>
+                </header>
+                <p>Реализация задачи включает в себя манипуляции с DOM, event listeners, замыкания.</p>
+                <div class="lesson-code">
+                  <pre><code class="language-javascript">
+    function blindPrint(attempt = 0) {
+
+        let
+            options = [["ф", "а"], ["ы", "в"], ["о", "ж"]],
+            match = '',
+            limitIndex = 2, // Можно добавлять хоть сколько попыток
+            elem = document.createElement("div");
+
+        for (let i = 0; i < 10; ++i) {
+            match += options[attempt][Math.floor(Math.random() * 2)];
+        }
+
+
+        alert("LEVEL #" + (attempt + 1) + "\n\nПоставьте мизинец левой руки на букву Ф, безымянный палец — на Ы, средний — на В, указательный — на А. " +
+            "\nМизинец правой руки на букву Ж, безымянный палец — на Д, средний — на Л, указательный — на О. " +
+            "\n\nЗапомните расположение пальцев");
+
+
+        elem.classList.add("overlay");
+        elem.innerHTML = `< h3 >Введите, не глядя на клавиатуру:< /h3 >< p >${match}< /p >< div >< input id='val' maxlength="10" name='val'/>< div style="text-align: center; padding-top: 12px;">< button >Отмена< /button >< /div >< /div >`
+        document.body.appendChild(elem);
+        elem.querySelector('button').addEventListener('click', removeElement, false);
+        document.getElementById("val").addEventListener('input', onInput, false)
+        document.getElementById("val").focus();
+
+        function removeElement() {
+            elem.parentNode.removeChild(elem);
+        }
+
+        function onInput(ev) {
+            let value = ev.target.value;
+
+            if (value.length === 10) {
+                removeElement();
+
+                setTimeout(() => {
+                    if (value === match) {
+                        alert("Все верно!");
+                        attempt < limitIndex ? blindPrint(++attempt) : alert('ПОБЕДА!');
+                    } else {
+                        alert("Ошибка. Это конец!");
+                    }
+                }, 0);
+            }
+        }
+    }
+
+            </code></pre>
+                </div>
+            </div>
+
+
+            <div class="task">
+                <header class="task-header">
+                    <h4>Задача №3</h4>
+                    <div class="btn-wrapper">
+                        <button onclick="initPuzzleModified()">Запустить</button>
+                        </button>
+                    </div>
+                </header>
+                <div class="lesson-code">
+                  <pre><code class="language-javascript">
+    function initPuzzleModified() {
+        // a. Избавиться в игре в загадки от дублирования кода, используя массивы и функции.
+        // b. Сделать так, чтобы программа поддерживала несколько правильных ответов на один и тот же вопрос. Все возможные варианты задаются программистом в коде программы.
+
+        let
+            response = undefined,
+            wasCorrect = 0,
+            questions = shuffle([
+                {
+                    text: "Примерно сколько раз Пахом отжимался, когда молодой был? \nУкажите букву правильного ответа:" +
+                        "\na) 8;" +
+                        "\nb) 10;" +
+                        "\nc) 100;" +
+                        "\nd) 20",
+                    answer: ["d"]
+                }
+                , {
+                    text: "\"Какое утверждение верное?\" \nУкажите буквы правильного ответа через запятую:" +
+                        "\na) функции высшего порядка могут возвращать функции;" +
+                        "\nb) замыканиями называются функции, не возвращающие значение;" +
+                        "\nc) прототипы нельзя расширять;" +
+                        "\nd) чистая функция не способствует изменению окружающей среды",
+                    answer: ["a", "d"]
+                },
+                {
+                    text: "\"Год отмены крепостного права.\" \nУкажите букву правильного ответа:" +
+                        "\na) 1761;" +
+                        "\nb) 1861;" +
+                        "\nc) 1864;" +
+                        "\nd) 1657",
+                    answer: ["b"]
+                },
+                {
+                    text: "\"Изъятие из обращения избыточной массы денег с целью увеличения их покупательной способности - это...\" \nУкажите букву правильного ответа:" +
+                        "\na) инфляция;" +
+                        "\nb) дефляция;" +
+                        "\nc) стагнация;" +
+                        "\nd) прокрастинация",
+                    answer: ["b"]
+                }
+            ]);
+
+        for (let i = 0; i < questions.length; ++i) {
+
+            response = prompt(questions[i].text).split(",").map(value => value.trim());
+
+            if (response.length !== questions[i].answer.length || !response.every(value => questions[i].answer.includes(value))) {
+                // Incorrect guess
+
+                let left = questions.length - 1 - i;
+
+                if (left > 0) {
+
+                    let correctWord = left > 1 ? "загадки" : "загадка";
+
+                    alert("К сожалению, неверно 😔 \nЕще есть в наличии " + left + " " + correctWord);
+                } else {
+                    alert("Неверно 😔 \nДосада, это была последняя загадка...");
+                }
+            } else {
+                // Success
+                alert("Верно!");
+                ++wasCorrect;
+            }
+
+            if (i === questions.length - 1) {
+                alert(`Разгадано загадок: ${wasCorrect}`);
+                wasCorrect === questions.length ? alert('Победа! Вы разгадали все загадки!') : alert(`Game over!`);
+            }
+
+        }
+
+
+        function shuffle(arr) {
+            let j, x, i;
+            for (i = arr.length - 1; i > 0; i--) {
+                j = Math.floor(Math.random() * (i + 1));
+                x = arr[i];
+                arr[i] = arr[j];
+                arr[j] = x;
+            }
+            return arr;
+        }
+
+    }
+            </code></pre>
+                </div>
+            </div>
+
+
+        </div>
+
+        <footer class="end">
+            <a href="mailto:vladsdamnmemory@outlook.com">Задавайте вопросы по электронной почте</a>
+        </footer>
+
     </div>
 
 
@@ -500,6 +762,7 @@
         </div>
     </div>
 
+
 </div>
 
 
@@ -523,7 +786,6 @@
             alert(`EUR ${(amount / EUR_TO_RUB).toFixed(2)}, USD ${(amount / USD_TO_RUB).toFixed(2)}`)
         }
     }
-
 
     function calculateArea() {
         // Пользователь вводит длину оснований трапеции (a и b), а также высоту трапеции h.
@@ -658,6 +920,181 @@
         }
 
     }
+</script>
+<!-- Lesson 3 -->
+<script type="application/javascript">
+
+    function createArrByLength(n) {
+        // a. Написать функцию, которая принимает в качестве параметра число n.
+        // Результатом работы функции является массив из N элементов со значениями 1, 2, 3… n.
+        if (typeof n !== "number") throw new TypeError("Argument is not a number");
+        let i = 0, arr = [];
+        while (i < n) {
+            arr.push(++i)
+        }
+        return arr;
+    }
+
+    function reduce(arr) {
+        // b. Написать функцию, которая принимает массив чисел. Результатом работы функции является сумма чисел этого массива.
+        if (!arr.every(value => typeof value === "number")) throw new TypeError("Array must contain numbers only");
+        return arr.reduce((acc, val) => acc += val);
+    }
+
+    function getMax(arr) {
+        //  c. Написать функцию, которая на вход получает массив целых чисел, и в качестве результата возвращает максимальное число.
+        if (!arr.every(value => typeof value === "number" && value % 1 === 0)) throw new TypeError("Array must contain digits");
+        return Math.max(...arr);
+    }
+
+    function getMin(arr) {
+        //     d. Написать функцию, которая на вход получает массив целых чисел, и в качестве результата возвращает минимальное число.
+        if (!arr.every(value => typeof value === "number" && value % 1 === 0)) throw new TypeError("Array must contain digits");
+        return Math.min(...arr);
+    }
+
+    function getEvenArr(arr) {
+        if (!arr.every(value => typeof value === "number" && value % 1 === 0)) throw new TypeError("Array must contain digits");
+        //     f. Написать функцию, которая на вход получает массив целых чисел, и в качестве результата возвращает только четные числа из этого массива.
+        //     Чтобы определить четность числа, воспользуйтесь оператором для подсчета остатка от деления: x % 2. Если остаток от деления числа на 2 равен 0,
+        //     число будет четное.
+        return arr.filter(v => v % 2 === 0);
+    }
+
+    function blindPrint(attempt = 0) {
+        // Можно добавлять хоть сколько попыток
+
+        let
+            options = [["ф", "а"], ["ы", "в"], ["о", "ж"]],
+            match = '',
+            limitIndex = 2,
+            elem = document.createElement("div");
+
+        for (let i = 0; i < 10; ++i) {
+            match += options[attempt][Math.floor(Math.random() * 2)];
+        }
+
+
+        alert("LEVEL #" + (attempt + 1) + "\n\nПоставьте мизинец левой руки на букву Ф, безымянный палец — на Ы, средний — на В, указательный — на А. " +
+            "\nМизинец правой руки на букву Ж, безымянный палец — на Д, средний — на Л, указательный — на О. " +
+            "\n\nЗапомните расположение пальцев");
+
+
+        elem.classList.add("overlay");
+        elem.innerHTML = `<h3>Введите, не глядя на клавиатуру:</h3><p>${match}</p><div><input id='val' maxlength="10" name='val' /><div style="text-align: center; padding-top: 12px;"><button>Отмена</button></div></div>`
+        document.body.appendChild(elem);
+        elem.querySelector('button').addEventListener('click', removeElement, false);
+        document.getElementById("val").addEventListener('input', onInput, false)
+        document.getElementById("val").focus();
+
+        function removeElement() {
+            elem.parentNode.removeChild(elem);
+        }
+
+        function onInput(ev) {
+            let value = ev.target.value;
+
+            if (value.length === 10) {
+                removeElement();
+
+                setTimeout(() => {
+                    if (value === match) {
+                        alert("Все верно!");
+                        attempt < limitIndex ? blindPrint(++attempt) : alert('ПОБЕДА!');
+                    } else {
+                        alert("Ошибка. Это конец!");
+                    }
+                }, 0);
+            }
+        }
+    }
+
+    function initPuzzleModified() {
+        // a. Избавиться в игре в загадки от дублирования кода, используя массивы и функции.
+        // b. Сделать так, чтобы программа поддерживала несколько правильных ответов на один и тот же вопрос. Все возможные варианты задаются программистом в коде программы.
+
+        let
+            response = undefined,
+            wasCorrect = 0,
+            questions = shuffle([
+                {
+                    text: "Примерно сколько раз Пахом отжимался, когда молодой был? \nУкажите букву правильного ответа:" +
+                        "\na) 8;" +
+                        "\nb) 10;" +
+                        "\nc) 100;" +
+                        "\nd) 20",
+                    answer: ["d"]
+                }
+                , {
+                    text: "\"Какое утверждение верное?\" \nУкажите буквы правильного ответа через запятую:" +
+                        "\na) функции высшего порядка могут возвращать функции;" +
+                        "\nb) замыканиями называются функции, не возвращающие значение;" +
+                        "\nc) прототипы нельзя расширять;" +
+                        "\nd) чистая функция не способствует изменению окружающей среды",
+                    answer: ["a", "d"]
+                },
+                {
+                    text: "\"Год отмены крепостного права.\" \nУкажите букву правильного ответа:" +
+                        "\na) 1761;" +
+                        "\nb) 1861;" +
+                        "\nc) 1864;" +
+                        "\nd) 1657",
+                    answer: ["b"]
+                },
+                {
+                    text: "\"Изъятие из обращения избыточной массы денег с целью увеличения их покупательной способности - это...\" \nУкажите букву правильного ответа:" +
+                        "\na) инфляция;" +
+                        "\nb) дефляция;" +
+                        "\nc) стагнация;" +
+                        "\nd) прокрастинация",
+                    answer: ["b"]
+                }
+            ]);
+
+        for (let i = 0; i < questions.length; ++i) {
+
+            response = prompt(questions[i].text).split(",").map(value => value.trim());
+
+            if (response.length !== questions[i].answer.length || !response.every(value => questions[i].answer.includes(value))) {
+                // Incorrect guess
+
+                let left = questions.length - 1 - i;
+
+                if (left > 0) {
+
+                    let correctWord = left > 1 ? "загадки" : "загадка";
+
+                    alert("К сожалению, неверно 😔 \nЕще есть в наличии " + left + " " + correctWord);
+                } else {
+                    alert("Неверно 😔 \nДосада, это была последняя загадка...");
+                }
+            } else {
+                // Success
+                alert("Верно!");
+                ++wasCorrect;
+            }
+
+            if (i === questions.length - 1) {
+                alert(`Разгадано загадок: ${wasCorrect}`);
+                wasCorrect === questions.length ? alert('Победа! Вы разгадали все загадки!') : alert(`Game over!`);
+            }
+
+        }
+
+
+        function shuffle(arr) {
+            let j, x, i;
+            for (i = arr.length - 1; i > 0; i--) {
+                j = Math.floor(Math.random() * (i + 1));
+                x = arr[i];
+                arr[i] = arr[j];
+                arr[j] = x;
+            }
+            return arr;
+        }
+
+    }
+
 </script>
 </body>
 </html>

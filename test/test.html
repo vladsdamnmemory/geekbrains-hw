@@ -8,31 +8,55 @@
 
 
 <script>
-    calcDeposit();
+    createArrByLength(10);
+    reduce([1, 2, 3, 4]);
+    getMax([5, 4, 74, 8]);
+    getMin([5, 4, 74, 8]);
+    getEvenArr([5, 4, 74, 8, 3, 1, 9]);
 
-    function calcDeposit() {
-        // Пользователь вводит сумму вклада и процент, который будет начисляться ежегодно.
-        // Отобразить размер вклада поочередно на ближайшие 5 лет.
-
-        let money, percent, incorrect, years = 5;
-
-        do {
-            money = parseFloat(prompt("Введите сумму вклада"));
-            percent = parseFloat(prompt("Введите кол-во процентов по вкладу"));
-            incorrect = isNaN(money) || isNaN(percent);
-
-            if (incorrect) {
-                alert("Данные введены не верно. Попробуйте еще раз, пожалуйста");
-            }
+    function createArrByLength(n) {
+        // a. Написать функцию, которая принимает в качестве параметра число n.
+        // Результатом работы функции является массив из N элементов со значениями 1, 2, 3… n.
+        if (typeof n !== "number") throw new TypeError("Argument is not a number");
+        let i = 0, arr = [];
+        while (i < n) {
+            arr.push(++i)
         }
-        while (incorrect);
-
-        for (let i = 0; i < years; i++) {
-            // Будем считать, что речь идет о сложном проценте
-            alert(`Спустя ${i + 1} год(-а)/лет сумма вклада достигнет ${money = +(money / 100 * percent + money).toFixed(2)}`);
-        }
-
+        return arr;
     }
+
+    function reduce(arr) {
+        // b. Написать функцию, которая принимает массив чисел. Результатом работы функции является сумма чисел этого массива.
+        if (!arr.every(value => typeof value === "number")) throw new TypeError("Array must contain numbers only");
+        return arr.reduce((acc, val) => acc += val);
+    }
+
+    function getMax(arr) {
+        //  c. Написать функцию, которая на вход получает массив целых чисел, и в качестве результата возвращает максимальное число.
+        if (!arr.every(value => typeof value === "number" && value % 1 === 0)) throw new TypeError("Array must contain digits");
+        return Math.max(...arr);
+    }
+
+    function getMin(arr) {
+        //     d. Написать функцию, которая на вход получает массив целых чисел, и в качестве результата возвращает минимальное число.
+        if (!arr.every(value => typeof value === "number" && value % 1 === 0)) throw new TypeError("Array must contain digits");
+        return Math.min(...arr);
+    }
+
+    function getEvenArr(arr) {
+        if (!arr.every(value => typeof value === "number" && value % 1 === 0)) throw new TypeError("Array must contain digits");
+        //     f. Написать функцию, которая на вход получает массив целых чисел, и в качестве результата возвращает только четные числа из этого массива.
+        //     Чтобы определить четность числа, воспользуйтесь оператором для подсчета остатка от деления: x % 2. Если остаток от деления числа на 2 равен 0,
+        //     число будет четное.
+        return arr.filter(v => v % 2 === 0);
+    }
+
+</script>
+
+
+<script>
+
+
 </script>
 </body>
 </html>
